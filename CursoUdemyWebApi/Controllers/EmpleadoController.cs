@@ -24,5 +24,17 @@ namespace CursoUdemyWebApi.Controllers
             var listaEmpleados = _servicioEmpleado.DameEmpleados().Select(e=>e.convertirDTO());
             return listaEmpleados;
         }
+
+        [HttpGet("{codEmpleado}")]
+        public  ActionResult<EmpleadoDTO> DameEmpleado(string codEmpleado)
+        {
+            var empleado = _servicioEmpleado.DameEmpleado(codEmpleado).convertirDTO();
+
+            if(empleado is null)
+            {
+                return NotFound();
+            }
+            return empleado;
+        }
     }
 }
